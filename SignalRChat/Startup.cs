@@ -1,4 +1,7 @@
-﻿using Microsoft.Owin;
+﻿using System;
+using System.Diagnostics;
+using Microsoft.Owin;
+using Microsoft.Owin.Logging;
 using Owin;
 [assembly: OwinStartup(typeof(SignalRChat.Startup))]
 namespace SignalRChat
@@ -9,6 +12,14 @@ namespace SignalRChat
         {
             // Any connection or hub wire up and configuration should go here
             app.MapSignalR();
+        }
+    }
+
+    public class MyLogger : ILogger
+    {
+        public bool WriteCore(TraceEventType eventType, int eventId, object state, Exception exception, Func<object, Exception, string> formatter)
+        {
+        return true;    
         }
     }
 }
